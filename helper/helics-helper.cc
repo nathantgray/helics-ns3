@@ -120,7 +120,7 @@ HelicsHelper::InstallFilter (Ptr<Node> node, const std::string &name) const
 }
 
 ApplicationContainer
-HelicsHelper::InstallStaticSink (Ptr<Node> node, const std::string &name, const std::string &destination, bool is_global) const
+HelicsHelper::InstallStaticSink (Ptr<Node> node, const std::string &name, const std::string &destination, bool is_global, int port) const
 {
     ApplicationContainer apps;
     Ptr<HelicsStaticSinkApplication> app = m_factory_sink.Create<HelicsStaticSinkApplication> ();
@@ -132,14 +132,14 @@ HelicsHelper::InstallStaticSink (Ptr<Node> node, const std::string &name, const 
     Ptr<Ipv4> net = node->GetObject<Ipv4>();
     Ipv4InterfaceAddress interface_address = net->GetAddress(1,0);
     Ipv4Address address = interface_address.GetLocal();
-    app->SetLocal(address, 1234);
+    app->SetLocal(address, port);
     node->AddApplication (app);
     apps.Add (app);
     return apps;
 }
 
 ApplicationContainer
-HelicsHelper::InstallStaticSource (Ptr<Node> node, const std::string &name, const std::string &destination, bool is_global) const
+HelicsHelper::InstallStaticSource (Ptr<Node> node, const std::string &name, const std::string &destination, bool is_global, int port) const
 {
     ApplicationContainer apps;
     Ptr<HelicsStaticSourceApplication> app = m_factory_source.Create<HelicsStaticSourceApplication> ();
@@ -151,7 +151,7 @@ HelicsHelper::InstallStaticSource (Ptr<Node> node, const std::string &name, cons
     Ptr<Ipv4> net = node->GetObject<Ipv4>();
     Ipv4InterfaceAddress interface_address = net->GetAddress(1,0);
     Ipv4Address address = interface_address.GetLocal();
-    app->SetLocal(address, 1234);
+    app->SetLocal(address, port);
     node->AddApplication (app);
     apps.Add (app);
     return apps;

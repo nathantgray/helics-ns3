@@ -28,12 +28,11 @@ public:
 
   ApplicationContainer InstallFilter (Ptr<Node> node, const std::string &name) const;
 
-  ApplicationContainer InstallStaticSink (Ptr<Node> node, const std::string &name, const std::string &destination, bool is_global=false) const;
-  ApplicationContainer InstallGlobalStaticSink (Ptr<Node> node, const std::string &name, const std::string &destination) const { return InstallStaticSink (node, name, destination, true); }
+  ApplicationContainer InstallStaticSink (Ptr<Node> node, const std::string &name, const std::string &destination, bool is_global=false, int port=1234) const;
+  ApplicationContainer InstallGlobalStaticSink (Ptr<Node> node, const std::string &name, const std::string &destination, int port=1234) const { return InstallStaticSink (node, name, destination, true, port); }
 
-  ApplicationContainer InstallStaticSource (Ptr<Node> node, const std::string &name, const std::string &destination, bool is_global=false) const;
-  ApplicationContainer InstallGlobalStaticSource (Ptr<Node> node, const std::string &name, const std::string &destination) const { return InstallStaticSource (node, name, destination, true); }
-
+  ApplicationContainer InstallStaticSource (Ptr<Node> node, const std::string &name, const std::string &destination, bool is_global=false, int port=1234) const;
+  ApplicationContainer InstallGlobalStaticSource (Ptr<Node> node, const std::string &name, const std::string &destination, int port=1234) const { return InstallStaticSource (node, name, destination, true, port); }
 private:
   std::string broker;
   std::string name;
